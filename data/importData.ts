@@ -1,19 +1,22 @@
-
-
 import { exit } from "process";
 import { mongooseConnection, startDatabase } from "../src/database";
-import { AcronymModel } from "../src/acronyms/acronym.model";
-import data from "./acronym.json";
+import { readFile } from "fs/promises";
+import { join } from "path";
+import { AcronymMongoModel } from "../src/acronyms/acronym-mongo.model";
 
 const importData = async () : Promise<void> => {
     await startDatabase();
 
-    for(const item of data ) {
+    const filePath = join(__dirname, "./acronym.json");
+    console.log(`Reading from file: ${filePath}`);
+    const contents = await readFile(filePath, "utf-8");
+    const dataToImprt = JSON.parse(contents);
+
+    for(const item of dataToImprt ) {
         for(const key in item) {
             console.log( `${key} : ${item[key]}`);
-
-            if(!(await AcronymModel.findOne({acronym: key}))) {
-                await new AcronymModel({
+            if(!(await AcronymMongoModel.findOne({acronym: key}))) {
+                await new AcronymMongoModel({
                     acronym: key,
                     definition: item[key]                
                 }).save();

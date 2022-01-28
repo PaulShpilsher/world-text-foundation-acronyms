@@ -4,7 +4,7 @@ import { exit } from "process";
 
 
 const mongoConnect = async (opt = {}) => 
-    await mongoose.connect(config.MONGO_URI, {...opt,
+    await mongoose.connect(config.mongoUri, {...opt,
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,

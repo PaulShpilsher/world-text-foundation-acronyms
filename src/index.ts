@@ -8,6 +8,6 @@ startDatabase();
 // Create HTTP server.
 const server = http.createServer(app);
 
-server.listen(config.PORT, () => {
-    console.log(`listening at http://localhost:${config.PORT}`)
+server.listen(config.port, () => {
+    console.log(`listening at http://localhost:${config.port}`)
 });

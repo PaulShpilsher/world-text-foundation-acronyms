@@ -1,5 +1,5 @@
 import { AcronymModel, AcronymUpdateModel } from "./acronym.model";
-import { AcronymDocument, AcronymMongoModel, toAcronymModel } from "./acronym-mongo..model";
+import { AcronymDocument, AcronymMongoModel, toAcronymModel } from "./acronym-mongo.model";
 
 export abstract class AcronymService {
 
