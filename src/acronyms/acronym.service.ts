@@ -5,11 +5,7 @@ export abstract class AcronymService {
 
     static async create(model: AcronymModel): Promise<boolean> {
         try {
-            const createModel : AcronymModel = {
-                acronym: model.acronym.toUpperCase(),
-                definition: model.definition.trim()
-            };
-            const document: AcronymDocument = await new AcronymMongoModel(createModel).save();
+            const document: AcronymDocument = await new AcronymMongoModel({...model}).save();
             return !!document;
         }
         catch(err) {
@@ -23,19 +19,20 @@ export abstract class AcronymService {
 
     static async update(acronym: string, model: AcronymUpdateModel): Promise<AcronymModel | null> {
         const conditions = {
-            acronym: acronym.toLocaleUpperCase()
+            acronym
         };
         const update = {
-            definition: model.definition.trim()
+            definition: model.definition
         };
-        const document: AcronymDocument = await AcronymMongoModel.findOneAndUpdate(conditions, update);
+        const document: AcronymDocument = await AcronymMongoModel.findOneAndUpdate(conditions, update).lean();
         return !document ? null : toAcronymModel(document);
     }
 
     static async readAcronyms(skip: number,limit: number, search: string) : Promise<AcronymModel[]> {            
         const documents  = await AcronymMongoModel.fuzzySearch(search)
             .skip(skip)
-            .limit(limit);
+            .limit(limit)
+            .lean();
 
         const acronyms = documents.map(toAcronymModel);
         return acronyms;
@@ -43,7 +40,7 @@ export abstract class AcronymService {
 
     static async readAcronym(acronym: string) : Promise<AcronymModel | null> {
         const conditions = {
-            acronym: acronym.toLocaleUpperCase()
+            acronym
         }; 
         const document  = await AcronymMongoModel.findOne(conditions).lean();
         return !document ? null : toAcronymModel(document);

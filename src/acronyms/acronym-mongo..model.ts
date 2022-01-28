@@ -9,6 +9,7 @@ const acronymSchema = new Schema({
         unique: true,
         minLength: 1,
         maxlength: 32,
+        uppercase: true,
         trim: true
     },
     definition: {

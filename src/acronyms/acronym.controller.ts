@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { send } from "process";
-import { isNumeric, parseNumber, sendErrorMessage } from "../utils";
+import { isNumeric } from "../utils";
 import { AcronymModel, AcronymUpdateModel } from "./acronym.model";
 import { AcronymService } from "./acronym.service";
 
@@ -10,20 +9,26 @@ export abstract class AcronymController {
 
     static async getAcronyms(req: Request, res: Response) {
         const { from, limit, search } = req.query as { from: string, limit: string, search: string };
+        
+        // validation
+        const validationErrorMessages : string[] = [];
 
         // from: required non-negative number
         if(!from || !isNumeric(from) || (from[0] ==="-")) {
-            return res.status(httpStatus.BAD_REQUEST).send("Invalid or missing [from] query parameter")
+            validationErrorMessages.push("Invalid or missing [from] query parameter");
         }
-
         // limit: required non-negative number
         if(!limit || !isNumeric(limit) || (limit[0] === "-")) {
-            return res.status(httpStatus.BAD_REQUEST).send("Invalid or missing [limit] query parameter")
+            validationErrorMessages.push("Invalid or missing [limit] query parameter");
         }
-
         // search: requred
         if(!search) {
-            return res.status(httpStatus.BAD_REQUEST).send("Missing [search] query parameter")
+            validationErrorMessages.push("Missing [search] query parameter");
+        }
+        if(validationErrorMessages.length) {
+            return res.status(httpStatus.BAD_REQUEST).json({
+                message: validationErrorMessages
+            });
         }
 
         const skipRecords = parseInt(from, 10);
@@ -83,7 +88,7 @@ export abstract class AcronymController {
             return res.sendStatus(httpStatus.BAD_REQUEST);
         }
         else {
-            return res.status(httpStatus.OK).json(model);
+            return res.sendStatus(httpStatus.OK);
         }
     }
 }
