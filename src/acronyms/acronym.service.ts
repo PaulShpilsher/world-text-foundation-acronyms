@@ -31,8 +31,7 @@ export abstract class AcronymService {
     static async readAcronyms(skip: number,limit: number, search: string) : Promise<AcronymModel[]> {            
         const documents  = await AcronymMongoModel.fuzzySearch(search)
             .skip(skip)
-            .limit(limit)
-            .lean();
+            .limit(limit);
 
         const acronyms = documents.map(toAcronymModel);
         return acronyms;
@@ -42,7 +41,7 @@ export abstract class AcronymService {
         const conditions = {
             acronym
         }; 
-        const document  = await AcronymMongoModel.findOne(conditions).lean();
+        const document  = await AcronymMongoModel.findOne(conditions);
         return !document ? null : toAcronymModel(document);
     }
 

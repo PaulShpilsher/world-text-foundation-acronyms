@@ -1,4 +1,5 @@
 {
     "port": 4040,
-    "mongoUri": "mongodb://localhost:27017/acronyms"
+    "mongoUri": "mongodb://localhost:27017/acronyms",
+    "seedFile": "./data/acronym.json"
 }

@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+
+  app:
+    container_name: wtf-app
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4040:4040
+    external_links:
+      - mongo
+    depends_on:
+      - mongo
+    volumes:
+      - ./:/code
+
+volumes:
+  mongodb:

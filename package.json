@@ -1,12 +1,11 @@
 {
-  "name": "world-text-foundation-acronyns",
+  "name": "world-text-foundation-acronyms",
   "version": "1.0.0",
-  "description": "",
+  "description": "WTF Acronym WebAPI service",
   "main": "dist/index.js",
   "scripts": {
     "postinstall": "node-config-ts",
     "mongo": "docker run -d -p 27017:27017 --name wtf-mongo mongo:latest",
-    "import-data": "ts-node ./data/importData.ts",
     "build": "tsc",
     "start": "ts-node ./src/index.ts",
     "dev": "nodemon ./src/index.ts",
@@ -30,6 +29,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@types/mongodb": "^4.0.7",
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
     "express": "^4.17.2",
