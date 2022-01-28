@@ -1,0 +1,67 @@
+https://public.3.basecamp.com/p/b7qHoMSf3CBYZ7FAqMn7XBmY
+
+G2i Node.js Test - March 2021 Version
+Adrian Carolli
+Adrian Carolli
+Last updated 
+Oct 15, 2021
+
+⬢ G2i NodeJS Code Challenge
+
+Messaging acronyms are everywhere now. Do you know all of them?
+
+Build a REST API for the World Texting Foundation, also known as WTF.
+
+A sample JSON data file will be provided with a base set of acronym definitions.
+
+We expect you to create a NodeJS server using modern best practices for API development.
+
+
+These endpoints should be created:
+
+GET /acronym?from=50&limit=10&search=:search
+▶ returns a list of acronyms, paginated using query parameters
+▶ response headers indicate if there are more results
+▶ returns all acronyms that fuzzy match against :search
+POST /acronym
+▶ receives an acronym and definition strings
+▶ adds the acronym definition to the db
+PUT /acronym/:acronym
+▶ receives an acronym and definition strings
+▶ uses an authorization header to ensure acronyms are protected
+▶ updates the acronym definition to the db for :acronym
+DELETE /acronym/:acronym
+▶ deletes :acronym
+▶ uses an authorization header to ensure acronyms are protected
+
+
+The Data
+Use this data however you like, either as a flat file, or to populate a database.
+
+acronym.json
+64.9 KB Download
+
+
+
+What Do We Expect From You
+
+Complete the challenge requirements stated above. 
+Implement an organised and easily understandable Node.js code following best practices
+Include clear instructions and requirements for how to run the app in a Development environment.
+Follow HTTP standards best practices. 
+Dockerize your app by using docker-compose. We want to be able to easily test your server by just doing `docker-compose up`. 
+
+
+Best Practices We Will Check For
+
+Code Style Practices https://github.com/goldbergyoni/nodebestpractices#3-code-style-practices
+Uses environment variables. https://github.com/goldbergyoni/nodebestpractices#-15-use-environment-aware-secure-and-hierarchical-config
+Uses async-await or promises for async error handling https://github.com/goldbergyoni/nodebestpractices#-21-use-async-await-or-promises-for-async-error-handling
+Use only built-in error object https://github.com/goldbergyoni/nodebestpractices#-22-use-only-the-built-in-error-object
+Distinguishes operational error from programmers errors https://github.com/goldbergyoni/nodebestpractices#-211-fail-fast-validate-arguments-using-a-dedicated-library https://github.com/goldbergyoni/nodebestpractices#-23-distinguish-operational-vs-programmer-errors
+Tests errors flows https://github.com/goldbergyoni/nodebestpractices#-28-test-error-flows-using-your-favorite-test-framework
+Catches unhandled promise rejections https://github.com/goldbergyoni/nodebestpractices#-210-catch-unhandled-promise-rejections
+Always awaits promises https://github.com/goldbergyoni/nodebestpractices#-212-always-await-promises-before-returning-to-avoid-a-partial-stacktrace
+Separate layers clearly. https://github.com/goldbergyoni/nodebestpractices#-14-separate-express-app-and-serverhttps://github.com/goldbergyoni/nodebestpractices#-12-layer-your-components-keep-the-web-layer-within-its-boundaries
+Use a mature logger to increase error visibility  https://github.com/goldbergyoni/nodebestpractices#-27-use-a-mature-logger-to-increase-error-visibility
+

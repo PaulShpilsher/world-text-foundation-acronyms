@@ -1,0 +1,4 @@
+{
+    "PORT": 4040,
+    "MONGO_URI": "mongodb://localhost:27017/acronyms"
+}
