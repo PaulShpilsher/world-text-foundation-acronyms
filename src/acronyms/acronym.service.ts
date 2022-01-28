@@ -46,5 +46,13 @@ export abstract class AcronymService {
         return !document ? null : toAcronymModel(document);
     }
 
+    static async deleteAcronym(acronym: string) : Promise<boolean> {
+        const conditions = {
+            acronym
+        }; 
+        const res  = await AcronymMongoModel.deleteOne(conditions);
+        return res?.ok === 1 && res?.deletedCount === 1;
+    }
+
 
 }

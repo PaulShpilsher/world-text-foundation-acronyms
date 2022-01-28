@@ -83,12 +83,17 @@ export abstract class AcronymController {
             return res.sendStatus(httpStatus.BAD_REQUEST);
         }
 
-        const model: AcronymModel | null  = await AcronymService.update(acronym, updateModel);
-        if(!model) {
+        const model = await AcronymService.update(acronym, updateModel);
+        return res.sendStatus(!model ? httpStatus.BAD_REQUEST : httpStatus.NO_CONTENT);
+    }
+
+    static async deleteAcronym(req: Request, res: Response) {
+        const { acronym } = req.params as { acronym: string };
+        if(!acronym) {
             return res.sendStatus(httpStatus.BAD_REQUEST);
         }
-        else {
-            return res.sendStatus(httpStatus.OK);
-        }
+
+        const deleted = await AcronymService.deleteAcronym(acronym);
+        return res.sendStatus(!deleted ? httpStatus.BAD_REQUEST : httpStatus.NO_CONTENT);
     }
 }
