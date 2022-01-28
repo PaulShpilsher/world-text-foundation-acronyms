@@ -9,5 +9,4 @@ export const acronymRouter = Router()
     .get("/:acronym", asyncApiHandler(AcronymController.getAcronym))
     .post("/", asyncApiHandler(AcronymController.createAcronym))
     .put("/:acronym", checkAuth, asyncApiHandler(AcronymController.updateAcronym))
-    .delete("/:acronym", checkAuth, asyncApiHandler(AcronymController.deleteAcronym))
-
+    .delete("/:acronym", checkAuth, asyncApiHandler(AcronymController.deleteAcronym));
