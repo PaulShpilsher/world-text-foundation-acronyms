@@ -61,10 +61,9 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
-###### Get acronyms using *fuzzy* match search of their definitions
+###### Get acronyms by *fuzzy* searching definitions
 ```
-  GET
-    /acronym?from=:fromlimit=:limit&search=:search
+  GET /acronym?from=:fromlimit=:limit&search=:search
 ```
 Query arguments:
 - *:search* is a mandatory string what to search for
@@ -84,8 +83,7 @@ Result is a JSON array of acronyms with definitions
 ```
 Paging note: after getting a page of results if more data available the response header will contain an entry "next" with a path to the next page of results.
 ```
-  GET
-    /acronym?from=10limit=5&search=freack
+  GET /acronym?from=10limit=5&search=freack
   
   Response header (when more data available):
     next: /acronym?from=15limit=5&search=freack
@@ -93,14 +91,18 @@ Paging note: after getting a page of results if more data available the response
 - On success returns: HTTP Status 200 (CREATED)
 - In case of missing or invalid query parameters returns: HTTP Status 400 (BAD_REQUEST)
 
-
-###### POST <i>adds new acronym and definition</i>
+Testing
 ```
-  POST
-    /acronym
+curl --location --request GET 'http://localhost:4040/acronym?from=50&limit=10&search=one'
+```
+
+###### Create new acronym with definition
+```
+  POST /acronym
   Header:
     Content-Type: application/json
-  Body: {
+  Body:
+  {
     acronym: string
     definition: string
   }
@@ -109,11 +111,20 @@ Paging note: after getting a page of results if more data available the response
 - If acronym already exist returns: HTTP Status 409 (CONFLICT)
 - If either acronym or definition is missing returns: HTTP Status 400 (BAD_REQUEST)
 
-
-###### PUT <i>updates existing acronym definition</i>
+Testing
 ```
-  PUT
-    /acronym/:acronym
+curl --location --request POST 'http://localhost:4040/acronym' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"acronym": "TEST99",
+    "definition": "Test ninety nine"
+}'
+```
+
+
+###### Update acronym's definition</i>
+```
+  PUT /acronym/:acronym
   Header:
     Authorization: XXXXX
     Content-Type: application/json
@@ -126,7 +137,15 @@ Paging note: after getting a page of results if more data available the response
 
 Note: *This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.*
 
-
+Testing
+```
+curl --location --request PUT 'http://localhost:4040/acronym/test99' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: auth-token' \
+--data-raw '{
+    "definition": "Test ninety nine. Take 2"
+}'
+```
 
 
 ## 🚀 Deployment <a name = "deployment"></a>
