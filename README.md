@@ -9,8 +9,8 @@
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Deployment](#deployment)
 - [API](#api)
+- [Deployment](#deployment)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
@@ -67,18 +67,17 @@ Start web server:
 Adds new acronym and definition.
 ```
   POST /acronym
-
-  Header Content-Type: application/json
-
-  Body {
+  Header:
+    Content-Type: application/json
+  Body: {
     acronym: string
     definition: string
   }
 ```
 Returns:
-  On success: HTTP Status 201 (CREATED)
-  If acronym already exist: HTTP Status 409 (CONFLICT)
-  If either acronym or definition is missing: HTTP Status 400 (BAD_REQUEST)
+- On success: HTTP Status 201 (CREATED)
+- If acronym already exist: HTTP Status 409 (CONFLICT)
+- If either acronym or definition is missing: HTTP Status 400 (BAD_REQUEST)
 
 
 
