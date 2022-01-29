@@ -1,9 +1,7 @@
 # World Texting Foundation, also known as WTF
 
-
-<p align="center">
-  REST API Web Service for managing acronyms. 
-    <br> 
+<p>
+REST API Web Service for managing acronyms frequently used in texting.
 </p>
 
 ## 📝 Table of Contents
@@ -63,7 +61,7 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
-### POST <i>adds new acronym and definition</i>
+###### POST <i>adds new acronym and definition</i>
 ```
   POST
     /acronym
@@ -78,7 +76,8 @@ Start web server:
 - If acronym already exist returns: HTTP Status 409 (CONFLICT)
 - If either acronym or definition is missing returns: HTTP Status 400 (BAD_REQUEST)
 
-### PUT <i>updates existing acronym definition</i>
+
+###### PUT <i>updates existing acronym definition</i>
 ```
   PUT
     /acronym/:acronym
@@ -91,7 +90,9 @@ Start web server:
 ```
 - On success returns: HTTP Status 204 (NO_CONTENT)
 - Otherwise returns: HTTP Status 400 (BAD_REQUEST)
-Note: This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.
+
+Note: *This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.*
+
 
 
 
