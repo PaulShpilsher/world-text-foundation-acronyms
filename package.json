@@ -2,6 +2,8 @@
   "name": "world-text-foundation-acronyms",
   "version": "1.0.0",
   "description": "WTF Acronym WebAPI service",
+  "author": "Paul Shpilsher",
+  "license": "ISC",
   "main": "dist/index.js",
   "scripts": {
     "postinstall": "node-config-ts",
@@ -11,8 +13,7 @@
     "dev": "nodemon ./src/index.ts",
     "lint": "eslint . --ext .ts"
   },
-  "author": "Paul Shpilsher",
-  "license": "ISC",
+
   "devDependencies": {
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.12",
