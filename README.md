@@ -1,6 +1,5 @@
-World Texting Foundation, also known as WTF
+# World Texting Foundation, also known as WTF
 
----
 
 <p align="center">
   REST API Web Service for managing acronyms. 
@@ -10,9 +9,8 @@ World Texting Foundation, also known as WTF
 ## 📝 Table of Contents
 
 - [About](#about)
-- [Getting Started](#getting_started)
 - [Deployment](#deployment)
-- [Usage](#usage)
+- [API](#api)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
 - [Contributing](../CONTRIBUTING.md)
@@ -33,7 +31,18 @@ A sample JSON data file will be provided with a base set of acronym definitions.
 
 We expect you to create a NodeJS server using modern best practices for API development.
 
-## 🏁 Getting Started <a name = "getting_started"></a>
+### Prerequisites
+
+  - Node.js (latest LTS version recommened)
+  - Docker needs to be installed if you wish use MomgoDB in container.
+  - Docker Compose to run the web service with MongoDB in Docker.
+  - Postman or some other tool to play with the APIs.
+
+```
+Give examples
+```
+
+### Installing
 
 These simple instructions are the guide to get you up and running in no time.
 
@@ -49,64 +58,30 @@ Start MongoDB server instance in a docker container :
 
 Start web server:
 ```
-npm run dev
+  npm run dev
 ```
 
-Done!  The APIs are now are accessible for 
+## 🎈 API <a name="api"></a>
 
-
-### Prerequisites
-
-  - Node.js (latest LTS version recommened)
-  - Docker needs to be installed if you wish use MomgoDB in container.
-  - Docker Compose to run the web service with MongoDB in Docker.
-  - Postman or some other tool to play with the APIs.  
-
+### POST 
+Adds new acronym and definition.
 ```
-Give examples
+  POST /acronym
+
+  Header Content-Type: application/json
+
+  Body {
+    acronym: string
+    definition: string
+  }
 ```
+Returns:
+  On success: HTTP Status 201 (CREATED)
+  If acronym already exist: HTTP Status 409 (CONFLICT)
+  If either acronym or definition is missing: HTTP Status 400 (BAD_REQUEST)
 
-### Installing
 
-A step by step series of examples that tell you how to get a development env running.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
-
-Add notes about how to use the system.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
