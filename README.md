@@ -61,16 +61,17 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
-###### GET
-- Returns all acronyms that *fuzzy* match against :search
-- Output is paginated using query parameters :from and :limit
-- All query parameters are mandatory. :from and :limit are non-negative numbers, :search is a string
-
+###### Get acronyms using *fuzzy* match search of their definitions
 ```
   GET
     /acronym?from=:fromlimit=:limit&search=:search
 ```
-Result:
+Query arguments:
+- *:search* is a mandatory string what to search for
+- *:from* is a mandatory non-negative number for paging describing how many results to skip
+- *:limit* is a mandatory non-negative number for paging  describing how many results to return
+
+Result is a JSON array of acronyms with definitions
 ```
   JSON:
   [
@@ -81,13 +82,12 @@ Result:
     ...
   ]
 ```
-If more results available the response header will contain an entry "next" with a path to the next page. 
-Example: 
+Paging note: after getting a page of results if more data available the response header will contain an entry "next" with a path to the next page of results.
 ```
   GET
     /acronym?from=10limit=5&search=freack
   
-  Response header:
+  Response header (when more data available):
     next: /acronym?from=15limit=5&search=freack
 ```
 - On success returns: HTTP Status 200 (CREATED)
