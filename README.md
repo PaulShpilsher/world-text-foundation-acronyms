@@ -63,10 +63,10 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
-### POST 
-Adds new acronym and definition.
+### POST <i>adds new acronym and definition</i>
 ```
-  POST /acronym
+  POST
+    /acronym
   Header:
     Content-Type: application/json
   Body: {
@@ -74,11 +74,24 @@ Adds new acronym and definition.
     definition: string
   }
 ```
-Returns:
-- On success: HTTP Status 201 (CREATED)
-- If acronym already exist: HTTP Status 409 (CONFLICT)
-- If either acronym or definition is missing: HTTP Status 400 (BAD_REQUEST)
+- On success returns: HTTP Status 201 (CREATED)
+- If acronym already exist returns: HTTP Status 409 (CONFLICT)
+- If either acronym or definition is missing returns: HTTP Status 400 (BAD_REQUEST)
 
+### PUT <i>updates existing acronym definition</i>
+```
+  PUT
+    /acronym/:acronym
+  Header:
+    Authorization: XXXXX
+    Content-Type: application/json
+  Body: {
+    definition: string
+  }
+```
+- On success returns: HTTP Status 204 (NO_CONTENT)
+- Otherwise returns: HTTP Status 400 (BAD_REQUEST)
+Note: This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.
 
 
 
