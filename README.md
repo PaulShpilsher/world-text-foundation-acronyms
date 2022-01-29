@@ -61,6 +61,44 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
+###### GET
+- Returns all acronyms that *fuzzy* match against :search
+- Output is paginated using query parameters :from and :limit
+- All query parameters are mandatory. :from and :limit are non-negative numbers, :search is a string 
+
+```
+  GET
+		/acronym?from=:fromlimit=:limit&search=:search
+  Header:
+    Content-Type: application/json
+  Body: {
+    acronym: string
+    definition: string
+  }
+```
+Result:
+```
+	JSON:
+	[
+		{
+			acronym: string
+   		definition: string
+  	},
+		...
+	]
+```
+
+If more results available the response header will contain an entry "next" with a path to the next page
+```
+	GET /acronym?from=10limit=5&search=freack
+	
+	Response header:
+		next: /acronym?from=15limit=5&search=freack
+```
+- On success returns: HTTP Status 200 (CREATED)
+- In case of missing or invalid query parameters returns: HTTP Status 400 (BAD_REQUEST)
+
+
 ###### POST <i>adds new acronym and definition</i>
 ```
   POST
