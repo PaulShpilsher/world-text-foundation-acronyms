@@ -61,7 +61,7 @@ Start web server:
 
 ## 🎈 API <a name="api"></a>
 
-###### Get acronyms by *fuzzy* searching definitions
+### Get acronyms by *fuzzy* searching definitions
 ```
   GET /acronym?from=:fromlimit=:limit&search=:search
 ```
@@ -102,7 +102,7 @@ curl --location --request GET 'http://localhost:4040/acronym?from=50&limit=10&se
   GET /acronym/:acronym
 ```
 Query arguments:
-- *:acronym* acronym string (case insensitive)
+- *:acronym* a mandatory string of an acronym (case insensitive)
 
 Result is a JSON object of an acronym and its definition
 ```
@@ -140,10 +140,10 @@ curl --location --request GET 'http://localhost:4040/acronym/test99'
 Testing
 ```
 curl --location --request POST 'http://localhost:4040/acronym' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "acronym": "TEST99",
-  "definition": "Test ninety nine"
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+    "acronym": "TEST99",
+    "definition": "Test ninety nine"
 }'
 ```
 
@@ -159,18 +159,38 @@ curl --location --request POST 'http://localhost:4040/acronym' \
   }
 ```
 - On success returns: HTTP Status 204 (NO_CONTENT)
-- Otherwise returns: HTTP Status 400 (BAD_REQUEST)
+- On failure returns: HTTP Status 400 (BAD_REQUEST)
+- On missing authorization header returns: HTTP Status 400 (UNAUTHORIZED)
 
 Note: *This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.*
 
 Testing
 ```
 curl --location --request PUT 'http://localhost:4040/acronym/test99' \
---header 'Content-Type: application/json' \
---header 'Authorization: auth-token' \
---data-raw '{
-  "definition": "Test ninety nine. Take 2"
+  --header 'Content-Type: application/json' \
+  --header 'Authorization: auth-token' \
+  --data-raw '{
+    "definition": "Test ninety nine. Take 2"
 }'
+```
+
+
+###### Delete an acronym
+```
+  GET /acronym/:acronym
+  Header:
+    Authorization: XXXXX
+```
+Note: *This API uses an authorization header to ensure acronyms are protected.  Currently this implementation just checks for the presense of Authorization header. It does not validate the token.*
+
+- On success returns: HTTP Status 204 (NO_CONTENT)
+- On failure returns: HTTP Status 400 (BAD_REQUEST)
+- On missing authorization header returns: HTTP Status 400 (UNAUTHORIZED)
+
+Testing
+```
+curl --location --request DELETE 'http://localhost:4040/acronym/test99' \
+  --header 'Authorization: auth-token'
 ```
 
 
