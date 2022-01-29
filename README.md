@@ -46,12 +46,12 @@ These simple instructions are the guide to get you up and running in no time.
 
 First install packages:
 ```
-	npm install
+  npm install
 ```
 
 Start MongoDB server instance in a docker container :
 ```
-	npm run mongo
+  npm run mongo
 ```
 
 Start web server:
@@ -66,9 +66,9 @@ Start web server:
   GET /acronym?from=:fromlimit=:limit&search=:search
 ```
 Query arguments:
-- *:search* is a mandatory string what to search for
-- *:from* is a mandatory non-negative number for paging describing how many results to skip
-- *:limit* is a mandatory non-negative number for paging  describing how many results to return
+- *:search* is a mandatory string what to search for (case insensitive)
+- *:from* is a mandatory non-negative number for paging: how many results to skip
+- *:limit* is a mandatory non-negative number for paging: maximum number of acronyms to return
 
 Result is a JSON array of acronyms with definitions
 ```
@@ -88,13 +88,39 @@ Paging note: after getting a page of results if more data available the response
   Response header (when more data available):
     next: /acronym?from=15limit=5&search=freack
 ```
-- On success returns: HTTP Status 200 (CREATED)
+- On success returns: HTTP Status 200 (OK)
 - In case of missing or invalid query parameters returns: HTTP Status 400 (BAD_REQUEST)
 
 Testing
 ```
 curl --location --request GET 'http://localhost:4040/acronym?from=50&limit=10&search=one'
 ```
+
+
+###### Get acronym's definitions
+```
+  GET /acronym/:acronym
+```
+Query arguments:
+- *:acronym* acronym string (case insensitive)
+
+Result is a JSON object of an acronym and its definition
+```
+  JSON:
+    {
+      acronym: string
+      definition: string
+    }
+```
+*Since the client alreany has the acronym, an agument could be made for retuning just the acronym's definition.  For consitency I decided returning the "whole" object across all GET verbs.*
+- On success returns: HTTP Status 200 (OK)
+- When acronym does not exist returns: HTTP Status 404 (NOT_FOUND)
+
+Testing
+```
+curl --location --request GET 'http://localhost:4040/acronym/test99'
+```
+
 
 ###### Create new acronym with definition
 ```
@@ -116,8 +142,8 @@ Testing
 curl --location --request POST 'http://localhost:4040/acronym' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-	"acronym": "TEST99",
-    "definition": "Test ninety nine"
+  "acronym": "TEST99",
+  "definition": "Test ninety nine"
 }'
 ```
 
@@ -143,7 +169,7 @@ curl --location --request PUT 'http://localhost:4040/acronym/test99' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: auth-token' \
 --data-raw '{
-    "definition": "Test ninety nine. Take 2"
+  "definition": "Test ninety nine. Take 2"
 }'
 ```
 
