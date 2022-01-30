@@ -18,12 +18,7 @@ This is a simple web service provices a simple way managing acronyms.
 It is a Node.js service written in Typescript that uses MongoDB for data storage.
 
 In non-production environments it will prepopulate fresh database with a few predefined
-acronym definitins In this package 
-Build a REST API for the World Texting Foundation, also known as WTF.
-
-A sample JSON data file will be provided with a base set of acronym definitions.
-
-We expect you to create a NodeJS server using modern best practices for API development.
+acronym definitions.
 
 ### Prerequisites
 
@@ -31,6 +26,7 @@ We expect you to create a NodeJS server using modern best practices for API deve
   - Docker needs to be installed if you wish use MomgoDB in container.
   - Docker Compose to run the web service with MongoDB in Docker.
   - Postman or some other tool to play with the APIs.
+
 
 ## Quick start <a name = "quickstart"></a>
 
@@ -194,7 +190,7 @@ curl --location --request DELETE 'http://localhost:4040/acronym/test99' \
 ```
 
 
-## 🚀 Configuration <a name = "config"></a>
+## �Configuration <a name = "config"></a>
 
 This web service uses [@node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
 The config file is 
@@ -223,4 +219,9 @@ You can also use command line arguments to override settings.
 ```
 
 For full understanding of configuration features please refer to [@node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
+
+
+## �TODO <a name = "todo"></a>
+- logging
+- unit testing
 
