@@ -8,8 +8,8 @@ REST API Web Service for managing acronyms frequently used in texting.
 
 - [About](#about)
 - [Quick start](#quickstart)
-- [API](#api)
 - [Configuration](#config)
+- [API](#api)
 
 ## About <a name = "about"></a>
 
@@ -55,7 +55,39 @@ Run fully functioning service with the database in docker containers using docke
 docker-compose up --build
 ```
 
-## 🎈 API <a name="api"></a>
+
+## �Configuration <a name = "config"></a>
+
+This web service uses [@node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
+The config file is 
+```
+./config/default.json
+
+{
+  "port": 4040,
+  "mongoUri": "mongodb://localhost:27017/acronyms",
+  "seedFile": "./data/acronym.json"
+}
+```
+You may change the values in that file. Also you can have settings applied based on a runtime environment.
+Example:
+set environment variable 
+```
+  NODE_ENV=production
+```
+then the service will use setting from *./config/env/production.json* config file.
+```
+  ./config/env/production.json
+```
+You can also use command line arguments to override settings.
+```
+  --port 5000
+```
+
+For full understanding of configuration features please refer to [@node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
+
+
+## API <a name="api"></a>
 
 ### Get acronyms by *fuzzy* searching definitions
 ```
@@ -188,38 +220,6 @@ Testing
 curl --location --request DELETE 'http://localhost:4040/acronym/test99' \
   --header 'Authorization: auth-token'
 ```
-
-
-## �Configuration <a name = "config"></a>
-
-This web service uses [@node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
-The config file is 
-```
-./config/default.json
-
-{
-  "port": 4040,
-  "mongoUri": "mongodb://localhost:27017/acronyms",
-  "seedFile": "./data/acronym.json"
-}
-```
-You may change the values in that file. Also you can have settings applied based on a runtime environment.
-Example:
-set environment variable 
-```
-  NODE_ENV=production
-```
-then the service will use setting from *./config/env/production.json* config file.
-```
-  ./config/env/production.json
-```
-You can also use command line arguments to override settings.
-```
-  --port 5000
-```
-
-For full understanding of configuration features please refer to [@node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
-
 
 ## �TODO <a name = "todo"></a>
 - logging
