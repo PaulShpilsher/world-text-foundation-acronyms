@@ -20,25 +20,18 @@ It is a Node.js service written in Typescript that uses MongoDB for data storage
 In non-production environments it will prepopulate fresh database with a few predefined
 acronym definitions.
 
-### Prerequisites
-
-  - Node.js (latest LTS version recommened)
-  - Docker needs to be installed if you wish use MomgoDB in container.
-  - Docker Compose to run the web service with MongoDB in Docker.
-  - Postman or some other tool to play with the APIs.
-
 
 ## Quick start <a name = "quickstart"></a>
 
 ### Developer world
-These simple instructions are the guide to get you up and running in no time.
+Assuming Node.js installed, here are simple instructions to get you up and running in no time
 
 First install packages:
 ```
   npm install
 ```
 
-Start MongoDB server instance in a docker container :
+Start MongoDB server instance in a docker container (*Docker must be installed*)
 ```
   npm run mongo
 ```
@@ -48,6 +41,12 @@ Start web server:
   npm run dev
 ```
 
+Build:
+```
+  npm run build
+```
+
+
 ## Docker world
 
 Run fully functioning service with the database in docker containers using docker compose:
@@ -56,9 +55,9 @@ docker-compose up --build
 ```
 
 
-## �Configuration <a name = "config"></a>
+## Configuration <a name = "config"></a>
 
-This web service uses [@node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
+This web service uses [node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
 The config file is 
 ```
 ./config/default.json
@@ -84,7 +83,7 @@ You can also use command line arguments to override settings.
   --port 5000
 ```
 
-For full understanding of configuration features please refer to [@node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
+For full understanding of configuration features please refer to [node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
 
 
 ## API <a name="api"></a>
