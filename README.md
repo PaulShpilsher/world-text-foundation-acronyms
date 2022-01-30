@@ -7,15 +7,11 @@ REST API Web Service for managing acronyms frequently used in texting.
 ## 📝 Table of Contents
 
 - [About](#about)
+- [Quick start](#quickstart)
 - [API](#api)
-- [Deployment](#deployment)
-- [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
-- [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
+- [Configuration](#config)
 
-## 🧐 About <a name = "about"></a>
+## About <a name = "about"></a>
 
 Messaging acronyms are everywhere now. Do you know all of them?
 This is a simple web service provices a simple way managing acronyms.
@@ -36,12 +32,9 @@ We expect you to create a NodeJS server using modern best practices for API deve
   - Docker Compose to run the web service with MongoDB in Docker.
   - Postman or some other tool to play with the APIs.
 
-```
-Give examples
-```
+## Quick start <a name = "quickstart"></a>
 
-### Installing
-
+### Developer world
 These simple instructions are the guide to get you up and running in no time.
 
 First install packages:
@@ -57,6 +50,13 @@ Start MongoDB server instance in a docker container :
 Start web server:
 ```
   npm run dev
+```
+
+## Docker world
+
+Run fully functioning service with the database in docker containers using docker compose:
+```
+docker-compose up --build
 ```
 
 ## 🎈 API <a name="api"></a>
@@ -97,7 +97,7 @@ curl --location --request GET 'http://localhost:4040/acronym?from=50&limit=10&se
 ```
 
 
-###### Get acronym's definitions
+### Get acronym's definitions
 ```
   GET /acronym/:acronym
 ```
@@ -122,7 +122,7 @@ curl --location --request GET 'http://localhost:4040/acronym/test99'
 ```
 
 
-###### Create new acronym with definition
+### Create new acronym with definition
 ```
   POST /acronym
   Header:
@@ -148,7 +148,7 @@ curl --location --request POST 'http://localhost:4040/acronym' \
 ```
 
 
-###### Update acronym's definition</i>
+### Update acronym's definition</i>
 ```
   PUT /acronym/:acronym
   Header:
@@ -175,7 +175,7 @@ curl --location --request PUT 'http://localhost:4040/acronym/test99' \
 ```
 
 
-###### Delete an acronym
+### Delete an acronym
 ```
   GET /acronym/:acronym
   Header:
@@ -194,25 +194,33 @@ curl --location --request DELETE 'http://localhost:4040/acronym/test99' \
 ```
 
 
-## 🚀 Deployment <a name = "deployment"></a>
+## 🚀 Configuration <a name = "config"></a>
 
-Add additional notes about how to deploy this on a live system.
+This web service uses [@node-config-ts](https://www.npmjs.com/package/node-config-ts) for configuration.
+The config file is 
+```
+./config/default.json
 
-## ⛏️ Built Using <a name = "built_using"></a>
+{
+  "port": 4040,
+  "mongoUri": "mongodb://localhost:27017/acronyms",
+  "seedFile": "./data/acronym.json"
+}
+```
+You may change the values in that file. Also you can have settings applied based on a runtime environment.
+Example:
+set environment variable 
+```
+  NODE_ENV=production
+```
+then the service will use setting from *./config/env/production.json* config file.
+```
+  ./config/env/production.json
+```
+You can also use command line arguments to override settings.
+```
+  --port 5000
+```
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+For full understanding of configuration features please refer to [@node-config-ts](https://www.npmjs.com/package/node-config-ts)  documentation
 
-## ✍️ Authors <a name = "authors"></a>
-
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
